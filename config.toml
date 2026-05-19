@@ -1,0 +1,28 @@
+[app]
+nome    = "Banco de Horas OCR — Provida Centro Médico"
+versao  = "0.1.0"
+usuario_padrao = "SISTEMA"
+
+[planilha]
+caminho          = "planilha/BancoHoras_Provida_v2.xlsm"
+aba_batidas      = "BatidasOCR"
+aba_controle     = "ControleOCR"
+linha_cabecalho  = 2   # linha 1 = título, linha 2 = cabeçalho, linha 3+ = dados
+
+[ocr]
+motor             = "tesseract"   # "tesseract" | "easyocr" | "google_vision"
+idioma_tesseract  = "por"         # Portuguese para Tesseract (instalar tessdata-por)
+confianca_minima  = 70.0          # campos abaixo disso vão para revisão humana (%)
+timeout_segundos  = 60
+
+[preprocessamento]
+dpi          = 300
+escala_fator = 2.0                # amplia imagem antes do OCR (melhora leitura)
+
+[saida]
+diretorio_revisao = "saida/revisao"   # CSVs gerados para revisão humana
+
+[validacao]
+hora_minima_permitida = "05:00"
+hora_maxima_permitida = "23:59"
+almoco_minimo_minutos = 30
