@@ -126,6 +126,44 @@ def _gravar_log(ws, log: LogProcessamento) -> None:
     logger.info(f"ControleOCR: log {log.id_importacao} gravado na linha {r}")
 
 
+def limpar_batidas(
+    planilha_path: Path,
+    colaborador: str,
+    competencia: str,
+) -> int:
+    """Remove fisicamente as linhas de BatidasOCR de um colaborador/competência.
+
+    Usa delete_rows() — remove as linhas por completo, sem deixar linhas vazias.
+    Chamado automaticamente após gravar_apuracao na ApuracaoConsolidada.
+    Retorna número de linhas removidas.
+    """
+    if not planilha_path.exists():
+        raise FileNotFoundError(f"Planilha não encontrada: {planilha_path}")
+
+    wb = openpyxl.load_workbook(str(planilha_path), keep_vba=True)
+    ws = wb["BatidasOCR"]
+
+    # Coleta os índices das linhas a remover (percorre de trás pra frente
+    # para não deslocar os índices durante a remoção)
+    indices: list[int] = []
+    for row in ws.iter_rows(min_row=_DATA_START, values_only=False):
+        cell_collab = row[_COL_BATIDAS["COLABORADOR"] - 1]
+        cell_comp   = row[_COL_BATIDAS["COMPETENCIA"] - 1]
+        if (str(cell_collab.value or "").strip() == colaborador
+                and str(cell_comp.value or "").strip() == competencia):
+            indices.append(cell_collab.row)
+
+    for row_idx in reversed(indices):
+        ws.delete_rows(row_idx)
+
+    wb.save(str(planilha_path))
+    wb.close()
+
+    n = len(indices)
+    logger.info(f"BatidasOCR: {n} linha(s) removida(s) para {colaborador} / {competencia}")
+    return n
+
+
 def exportar_para_excel(
     planilha_path: Path,
     folha: FolhaImportacao,

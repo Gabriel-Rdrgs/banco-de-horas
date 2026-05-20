@@ -16,10 +16,13 @@ openpyxl>=3.1.0
 
 # --- Utilitários ---
 python-dateutil>=2.8.0
+python-dotenv>=1.0.0        # carrega .env automaticamente
 
-# --- Fase 2.1+ (descomentar quando necessário) ---
-# easyocr>=1.7.0           # melhor para manuscrito; requer PyTorch (verificar Python 3.14)
-# google-cloud-vision       # OCR em nuvem, maior precisão
+# --- Fase 2.1 (cloud OCR) ---
+google-cloud-vision>=3.14.0   # OCR em nuvem, excelente para manuscrito
+
+# --- Fase 2.2+ (descomentar quando necessário) ---
+# easyocr>=1.7.0           # melhor que Tesseract; requer PyTorch (verificar Python 3.14)
 # streamlit>=1.30.0         # interface de revisão simples
 # fastapi>=0.110.0          # API REST futura
 # uvicorn>=0.29.0

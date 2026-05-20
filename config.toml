@@ -10,10 +10,13 @@ aba_controle     = "ControleOCR"
 linha_cabecalho  = 2   # linha 1 = título, linha 2 = cabeçalho, linha 3+ = dados
 
 [ocr]
-motor             = "tesseract"   # "tesseract" | "easyocr" | "google_vision"
-idioma_tesseract  = "por"         # Portuguese para Tesseract (instalar tessdata-por)
-confianca_minima  = 70.0          # campos abaixo disso vão para revisão humana (%)
+motor             = "google_vision"  # "tesseract" | "google_vision"
+idioma_tesseract  = "por"            # só para engine tesseract
+confianca_minima  = 70.0             # campos abaixo disso vão para revisão humana (%)
 timeout_segundos  = 60
+
+[google_vision]
+credentials_file  = "gcp_key.json"  # relativo à raiz do projeto; "" = usa ADC
 
 [preprocessamento]
 dpi          = 300

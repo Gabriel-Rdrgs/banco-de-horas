@@ -1,0 +1,21 @@
+# Credenciais — NUNCA versionar
+gcp_key.json
+*.json.key
+.env
+# .env.example é seguro versionar (não tem valores reais)
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# Temporários do OCR
+saida/revisao/*.csv
+saida/debug_*.png
+saida/preview_*.png
+
+# Planilha pessoal (manter no Git apenas se for intencional)
+# planilha/*.xlsm
