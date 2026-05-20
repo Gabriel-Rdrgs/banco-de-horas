@@ -1,28 +1,28 @@
 # === Banco de Horas OCR — Provida Centro Médico ===
-# Python 3.14+ required
-# Install: pip install -r requirements.txt
+# Python 3.11 ou mais recente
+# Instalação: pip install -r requirements.txt
 
-# --- Imagem e PDF ---
-opencv-python>=4.8.0
+# --- Interface web ---
+streamlit>=1.30.0
+
+# --- PDF e imagem ---
+PyMuPDF>=1.23.0               # renderiza PDF sem depender do Poppler
+opencv-python>=4.8.0          # remoção de grade + pré-processamento
 Pillow>=10.0.0
-pdf2image>=1.16.3          # requer Poppler no PATH (ver README)
 
-# --- OCR ---
-pytesseract>=0.3.13        # requer Tesseract binário instalado no sistema
+# --- OCR em nuvem (Azure — engine ativo) ---
+azure-ai-vision-imageanalysis>=1.0.0
 
-# --- Dados e Excel ---
-pandas>=2.0.0
+# --- Excel ---
 openpyxl>=3.1.0
 
-# --- Utilitários ---
+# --- Dados ---
+pandas>=2.0.0
 python-dateutil>=2.8.0
-python-dotenv>=1.0.0        # carrega .env automaticamente
 
-# --- Fase 2.1 (cloud OCR) ---
-google-cloud-vision>=3.14.0   # OCR em nuvem, excelente para manuscrito
+# --- Configuração ---
+python-dotenv>=1.0.0          # carrega credenciais do arquivo .env
 
-# --- Fase 2.2+ (descomentar quando necessário) ---
-# easyocr>=1.7.0           # melhor que Tesseract; requer PyTorch (verificar Python 3.14)
-# streamlit>=1.30.0         # interface de revisão simples
-# fastapi>=0.110.0          # API REST futura
-# uvicorn>=0.29.0
+# --- Engines alternativos (opcional) ---
+# anthropic>=0.20.0           # Claude Vision
+# google-cloud-vision>=3.0.0  # Google Vision
